@@ -33,3 +33,10 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+# Mongo
+data
+mongodb.log
+
+# Vim
+*.un~
