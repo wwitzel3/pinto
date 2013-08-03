@@ -12,6 +12,14 @@ requires = [
     'waitress',
     ]
 
+entry_points = """\
+[paste.app_factory]
+main = pinto:main
+
+[console_scripts]
+pinto_create_db = pinto.scripts.create:main
+""" # nopep8
+
 setup(name='pinto',
       version='0.0',
       description='pinto',
@@ -32,8 +40,5 @@ setup(name='pinto',
       install_requires=requires,
       tests_require=requires,
       test_suite="pinto",
-      entry_points="""\
-      [paste.app_factory]
-      main = pinto:main
-      """,
+      entry_points=entry_points,
       )

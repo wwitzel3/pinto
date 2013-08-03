@@ -2,22 +2,23 @@ from urlparse import urlparse
 
 import pymongo
 
-from pinto.core.interfaces import IMongoClientMaker
+from pinto.core.interfaces import IMongoDBMaker
 
-def get_mongo_client(request):
-    client = request.registry.getUtility(IMongoClientMaker)
+def get_mongo_db(request):
+    db = request.registry.getUtility(IMongoDBMaker)
 
     def cleanup(request):
-        client.close()
+        db.connection.close()
 
-    request.add_finish_callback(cleanup)
-    return client
+    request.add_finished_callback(cleanup)
+    return db
 
 def includeme(config):
     mongo_url = urlparse(config.registry.settings['mongo_uri'])
     client = pymongo.MongoClient(mongo_url.hostname, mongo_url.port)
-    config.registry.registerUtility(client, IMongoClientMaker)
+    database = client[mongo_url.path[1:]]
+    config.registry.registerUtility(database, IMongoDBMaker)
 
-    config.add_request_method(get_mongo_client, 'db', reify=True)
+    config.add_request_method(get_mongo_db, 'db', reify=True)
     config.include('pinto.core.resources')
 
