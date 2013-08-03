@@ -7,6 +7,7 @@ here = os.path.dirname(__file__)
 
 def setup_includes(config):
     config.include('pinto.core')
+    config.include('pinto.admin', route_prefix='/admin')
     config.include('pinto.post', route_prefix='/post')
     config.include('pinto.category', route_prefix='/category')
 
