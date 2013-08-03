@@ -40,3 +40,6 @@ mongodb.log
 
 # Vim
 *.un~
+
+# SASS
+.sass-cache
