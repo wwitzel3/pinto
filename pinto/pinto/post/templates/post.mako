@@ -1,1 +1,3 @@
-this is a post
+${url}
+<hr/>
+${body}
