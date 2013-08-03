@@ -1,4 +1,4 @@
 pinto
 =====
 
-A pyramid blogging system, because why not.
+A Pyramid blogging system, because why not.
