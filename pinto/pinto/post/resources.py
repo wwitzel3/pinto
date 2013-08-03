@@ -1,11 +1,9 @@
+from pinto.security import RootACL
 from pinto.post.model import Post
 
-class Root(object):
+class Root(RootACL):
     __name__ = ''
     __parent__ = None
-
-    def __init__(self, request):
-        self.request = request
 
     def __getitem__(self, key):
         if key:
@@ -13,5 +11,5 @@ class Root(object):
         raise KeyError
 
 def includeme(config):
+    config.add_route('post_new', '/new', factory=Root)
     config.add_route('post', '/{key}', factory=Root)
-

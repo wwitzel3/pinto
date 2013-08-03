@@ -1,4 +1,7 @@
-from pinto.admin.security import Root
+from pinto.security import RootACL
+
+class Root(RootACL):
+    pass
 
 def includeme(config):
     config.add_route('admin_index', '/', factory=Root)

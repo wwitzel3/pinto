@@ -5,3 +5,7 @@ from pyramid.view import view_config
 def post(request):
     return {}
 
+@view_config(route_name='post_new', context='pinto.post.resources.Root',
+             permission='admin', renderer='pinto:post/templates/new.mako')
+def post_new(request):
+    return {}
