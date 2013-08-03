@@ -14,6 +14,6 @@ def deferred_url_validator(node, kw):
 
 class Post(c.MappingSchema):
     url = c.SchemaNode(c.String(), validator=deferred_url_validator)
+    title = c.SchemaNode(c.String())
     body = c.SchemaNode(c.String())
-
 
