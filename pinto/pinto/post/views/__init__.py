@@ -15,7 +15,8 @@ def post(context, request):
              permission='admin', renderer='pinto:post/templates/new.mako')
 def post_new(request):
     schema = Post().bind(request=request,
-                         url=request.POST.get('url'))
+                         url=request.POST.get('url'),
+                         title=request.POST.get('title',''))
     form = deform.Form(schema)
 
     if 'form.submitted' in request.params:

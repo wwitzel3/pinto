@@ -1,3 +1,5 @@
+<%inherit file="pinto:core/templates/base.mako"/>
+
 <form action="${request.route_url('post_new')}" method="POST">
 <input type="hidden" name="form.submitted" value="1"/>
 % for field in form:

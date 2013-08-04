@@ -1,5 +1,9 @@
-from slugify import slugify
+from datetime import datetime
+
+import deform
 import colander as c
+
+from slugify import slugify
 
 @c.deferred
 def deferred_url_validator(node, kw):
@@ -12,6 +16,19 @@ def deferred_url_validator(node, kw):
         def invalid_url(node, value):
             raise c.Invalid(node, u"A post with that url already exists.")
         return invalid_url
+
+@c.deferred
+def deferred_url_missing(node, kw):
+    """Create a sane default if the url node is missing
+    """
+    return slugify(kw.get('title'))
+
+@c.deferred
+def deferred_date_missing(node, kw):
+    default_date = kw.get('default_date')
+    if default_date is None:
+        default_date = datetime.utcnow()
+    return default_date
 
 class Tags(c.SchemaType):
     """Uses a standard text input
@@ -31,7 +48,16 @@ class Tags(c.SchemaType):
 
 
 class Post(c.MappingSchema):
-    url = c.SchemaNode(c.String(), validator=deferred_url_validator)
+    url = c.SchemaNode(c.String(),
+                       validator=deferred_url_validator,
+                       missing=deferred_url_missing)
     title = c.SchemaNode(c.String())
     body = c.SchemaNode(c.String())
     tags = c.SchemaNode(Tags())
+    date = c.SchemaNode(c.DateTime(),
+                        missing=deferred_date_missing)
+    active = c.SchemaNode(c.Boolean(),
+                          default=False,
+                          missing=False,
+                          title=u"Publish")
+
