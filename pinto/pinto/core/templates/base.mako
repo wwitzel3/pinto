@@ -9,7 +9,7 @@
 
 
   <link rel="stylesheet" href="${request.static_url('pinto:static/stylesheets/app.css')}">
-
+  <script src="${request.static_url('pinto:static/javascripts/vendor/jquery.js')}" type="text/javascript" charset="utf-8"></script>
   <script src="${request.static_url('pinto:static/javascripts/vendor/custom.modernizr.js')}"></script>
 
 </head>

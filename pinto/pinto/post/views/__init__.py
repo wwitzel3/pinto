@@ -1,4 +1,8 @@
+from collections import namedtuple
+
 import deform
+
+from slugify import slugify
 
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
@@ -14,11 +18,10 @@ def post(context, request):
 @view_config(route_name='post_new', context='pinto.post.resources.Root',
              permission='admin', renderer='pinto:post/templates/new.mako')
 def post_new(request):
-    schema = Post().bind(request=request,
-                         url=request.POST.get('url'),
-                         title=request.POST.get('title',''))
+    url = request.POST.get('url','')
+    schema = Post().bind(request=request, url=url,
+                         markdown=request.POST.get('markdown',''))
     form = deform.Form(schema)
-
     if 'form.submitted' in request.params:
         try:
             appstruct = form.validate(request.POST.items())
@@ -28,6 +31,14 @@ def post_new(request):
         except deform.ValidationFailure as e:
             pass
 
+    form_dict = {f.name:f for f in form}
+    Form = namedtuple('Form', ','.join(form_dict.keys()))
+    form = Form._make(form_dict.values())
     return {
         'form':form,
     }
+
+@view_config(route_name='post_slug', context='pinto.post.resources.Root',
+             permission='admin', renderer='json')
+def post_slug(request):
+    return {'slug':slugify(request.GET.get('title'))}

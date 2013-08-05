@@ -19,3 +19,4 @@ def get_recent_posts_in_category(request, category, num_of_posts=10, page=1):
     posts = request.db.post.find({'active':True,
                                   'category':category}).sort('_id',-1)
     return page_results(posts, num_of_posts, page)
+

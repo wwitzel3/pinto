@@ -1,3 +1,3 @@
 ${url}
 <hr/>
-${body}
+${body | n}

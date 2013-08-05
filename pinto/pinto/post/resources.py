@@ -12,4 +12,5 @@ class Root(RootACL):
 
 def includeme(config):
     config.add_route('post_new', '/new', factory=Root)
+    config.add_route('post_slug', '/api/slugify', factory=Root)
     config.add_route('post', '/{key}', factory=Root, traverse='{key}')
