@@ -9,6 +9,7 @@
 
 
   <link rel="stylesheet" href="${request.static_url('pinto:static/stylesheets/app.css')}">
+  <link rel="stylesheet" href="${request.static_url('pinto:static/stylesheets/pygments.css')}">
   <script src="${request.static_url('pinto:static/javascripts/vendor/jquery.js')}" type="text/javascript" charset="utf-8"></script>
   <script src="${request.static_url('pinto:static/javascripts/vendor/custom.modernizr.js')}"></script>
 
@@ -20,10 +21,9 @@
     <div class="large-12 columns">
       <div class="nav-bar right">
        <ul class="button-group">
-         <li><a href="#" class="button">Link 1</a></li>
-         <li><a href="#" class="button">Link 2</a></li>
-         <li><a href="#" class="button">Link 3</a></li>
-         <li><a href="#" class="button">Link 4</a></li>
+           <li><a href="${request.route_url('index')}" class="button">Home</a></li>
+           <li><a href="#" class="button">About</a></li>
+           <li><a href="${request.route_url('admin_index')}" class="button">Login</a></li>
         </ul>
       </div>
       <h1>Blog <small>This is my blog. It's awesome.</small></h1>

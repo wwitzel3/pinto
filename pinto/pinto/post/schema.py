@@ -28,7 +28,7 @@ def deferred_date_missing(node, kw):
 @c.deferred
 def deferred_body_missing(node, kw):
     markdown = kw.get('markdown')
-    return markdown2.markdown(markdown)
+    return markdown2.markdown(markdown, extras=["fenced-code-blocks",])
 
 
 class Tags(c.SchemaType):
