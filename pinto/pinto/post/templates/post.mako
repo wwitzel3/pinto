@@ -1,4 +1,5 @@
 <%inherit file="pinto:core/templates/base.mako"/>
+<%namespace name="h" file="pinto:core/templates/lib/helpers.mako"/>
 
       <article>
 
@@ -7,6 +8,6 @@
 
         ${body | n}
 
-        <small>Tags: ${','.join(['<a href="#">%s</a>'% t for t in tags]) | n}</small>
-      </article>
+        <small>Tags: ${h.render_tags(request,tags)}</small>
+        </article>
 

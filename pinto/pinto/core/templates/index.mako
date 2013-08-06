@@ -1,4 +1,5 @@
 <%inherit file="pinto:core/templates/base.mako"/>
+<%namespace name="h" file="pinto:core/templates/lib/helpers.mako"/>
 
       % for post in posts:
       <article>
@@ -7,6 +8,8 @@
         <h6>Written by <a href="#">Wayne Witzel III</a> on ${post.get('date').strftime('%B %d, %Y')}.</h6>
 
         ${post.get('body') | n}
+
+        <small>Tags: ${h.render_tags(request, post.get('tags'))}</small>
       </article>
       <hr/>
       % endfor
@@ -14,7 +17,7 @@
 <%def name="sidebar()">
       <div>
         <h5>Categories</h5>
-        ${', '.join(['<a href="%s">%s</a>' % (request.route_url('category', tag=t),t) for t in tags]) | n}
+        ${h.render_tags(request,tags)}
       </div>
 
       <div class="panel">
