@@ -20,5 +20,5 @@ def includeme(config):
     config.registry.registerUtility(database, IMongoDBMaker)
 
     config.add_request_method(get_mongo_db, 'db', reify=True)
-    config.include('pinto.core.resources')
+    config.include('pinto.core.routes')
 

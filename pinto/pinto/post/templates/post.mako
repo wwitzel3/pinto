@@ -2,7 +2,7 @@
 
       <article>
 
-        <h3><a href="${request.route_url('post', key=url)}">${title}</a></h3>
+        <h3><a href="${request.route_url('post', url=url)}">${title}</a></h3>
         <h6>Written by <a href="#">Wayne Witzel III</a> on ${date.strftime('%B %d, %Y')}.</h6>
 
         ${body | n}

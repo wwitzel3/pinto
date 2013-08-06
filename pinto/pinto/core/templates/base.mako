@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Pinto - Because why not.</title>
+  <title>${request.settings.get('title')}</title>
 
 
   <link rel="stylesheet" href="${request.static_url('pinto:static/stylesheets/app.css')}">
@@ -26,7 +26,7 @@
            <li><a href="${request.route_url('admin_index')}" class="button">Login</a></li>
         </ul>
       </div>
-      <h1>Blog <small>This is my blog. It's awesome.</small></h1>
+      <h1>${request.settings.get('title')} <small>${request.settings.get('subtitle')}</small></h1>
       <hr />
     </div>
   </div>
@@ -48,20 +48,7 @@
 
     <aside class="large-3 columns">
 
-      <h5>Categories</h5>
-      <ul class="side-nav">
-        <li><a href="#">News</a></li>
-        <li><a href="#">Code</a></li>
-        <li><a href="#">Design</a></li>
-        <li><a href="#">Fun</a></li>
-        <li><a href="#">Weasels</a></li>
-      </ul>
-
-      <div class="panel">
-        <h5>Featured</h5>
-        <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow.</p>
-        <a href="#">Read More &rarr;</a>
-      </div>
+      ${self.sidebar()}
 
     </aside>
 
@@ -92,3 +79,6 @@
   </footer>
 </body>
 </html>
+
+<%def name="sidebar()">
+</%def>

@@ -12,11 +12,6 @@
       % endfor
 
 <%def name="sidebar()">
-      <div>
-        <h5>Categories</h5>
-        ${', '.join(['<a href="%s">%s</a>' % (request.route_url('category', tag=t),t) for t in tags]) | n}
-      </div>
-
       <div class="panel">
         <h5>Featured</h5>
         <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow.</p>

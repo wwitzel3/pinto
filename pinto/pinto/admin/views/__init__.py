@@ -1,3 +1,5 @@
+import deform
+
 from pyramid.security import (
     remember,
     forget,
@@ -7,6 +9,8 @@ from pyramid.view import (
     forbidden_view_config,
 )
 from pyramid.httpexceptions import HTTPFound
+
+from pinto.admin.schema import Settings
 
 @view_config(route_name='admin_index', permission='admin',
              renderer='pinto:admin/templates/index.mako')
@@ -39,3 +43,22 @@ def logout(request):
     headers = forget(request)
     return HTTPFound(location = request.route_url('admin_index'),
                      headers = headers)
+
+@view_config(route_name='admin_settings', permission='admin',
+             renderer='pinto:admin/templates/settings.mako')
+def admin_settings(request):
+    schema = Settings()
+    form = deform.Form(schema, buttons=('submit',))
+
+    if 'submit' in request.POST:
+        try:
+            appstruct = form.validate(request.POST.items())
+            settings_id = request.settings.get('_id')
+            request.db.settings.update({'_id':settings_id}, appstruct)
+            return HTTPFound(location = request.route_url('admin_settings'))
+        except deform.ValidationFailure as e:
+            pass
+
+    return {
+        'form':form,
+    }

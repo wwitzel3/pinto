@@ -27,7 +27,10 @@ def main(argv=sys.argv):
     mongo_url = urlparse(settings['mongo_uri'])
     client = pymongo.MongoClient(mongo_url.hostname, mongo_url.port)
     db = client[mongo_url.path[1:]]
-    db.user.insert({'user':'admin', 'password':'password', 'groups':['admin']})
+    db.user.insert({'user':'admin', 'display_name': 'Wayne Witzel III',
+                    'password':'password', 'groups':['admin']})
+    db.settings.insert({'title':'Blog', 'subtitle':'This is my blog.',
+                        'email':'wayne@pieceofpy.com'})
 
 if __name__ == '__main__':
     main()

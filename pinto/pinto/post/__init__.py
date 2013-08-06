@@ -1,3 +1,3 @@
 def includeme(config):
-    config.include('pinto.post.resources')
+    config.include('pinto.post.routes')
 

@@ -8,15 +8,14 @@ from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 
 from pinto.post.schema import Post
+from pinto.post.model import get_post
 
-@view_config(route_name='post', context='pinto.post.model.Post',
-             renderer='pinto:post/templates/post.mako')
-def post(context, request):
-    post = context.get()
-    return post
+@view_config(route_name='post', renderer='pinto:post/templates/post.mako')
+def post(request):
+    return get_post(request)
 
-@view_config(route_name='post_new', context='pinto.post.resources.Root',
-             permission='admin', renderer='pinto:post/templates/new.mako')
+@view_config(route_name='post_new', permission='admin',
+             renderer='pinto:post/templates/new.mako')
 def post_new(request):
     url = request.POST.get('url','')
     schema = Post().bind(request=request, url=url,
@@ -38,7 +37,6 @@ def post_new(request):
         'form':form,
     }
 
-@view_config(route_name='post_slug', context='pinto.post.resources.Root',
-             permission='admin', renderer='json')
+@view_config(route_name='post_slug', permission='admin', renderer='json')
 def post_slug(request):
     return {'slug':slugify(request.GET.get('title'))}
