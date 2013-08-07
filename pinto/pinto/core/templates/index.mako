@@ -9,7 +9,7 @@
 
         ${post.get('body') | n}
 
-        <small>Tags: ${h.render_tags(request, post.get('tags'))}</small>
+        <small><strong>Tags:</strong> ${h.render_tags(request, post.get('tags'))}</small>
       </article>
       <hr/>
       % endfor
@@ -17,7 +17,9 @@
 <%def name="sidebar()">
       <div>
         <h5>Categories</h5>
+        <ul class="side-nav">
         ${h.render_tags(request,tags)}
+        </ul>
       </div>
 
       <div class="panel">

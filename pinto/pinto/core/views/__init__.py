@@ -15,3 +15,7 @@ def index(request):
         'tags':tags,
     }
 
+@view_config(route_name='about', renderer='pinto:core/templates/about.mako')
+def about(request):
+    return {}
+

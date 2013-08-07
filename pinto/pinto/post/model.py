@@ -17,5 +17,5 @@ def get_recent_posts_in_tags(request, tags, num_of_posts=10, page=1):
 
 def get_tags(request):
     result = request.db.command('distinct', 'post', key='tags')
-    return result.get('values')
+    return sorted(result.get('values'))
 

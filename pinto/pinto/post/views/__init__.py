@@ -26,7 +26,7 @@ def post_new(request):
             appstruct = form.validate(request.POST.items())
             request.db.post.insert(appstruct)
 
-            return HTTPFound(location = request.route_url('post', key=appstruct.get('url')))
+            return HTTPFound(location = request.route_url('post', url=appstruct.get('url')))
         except deform.ValidationFailure as e:
             pass
 

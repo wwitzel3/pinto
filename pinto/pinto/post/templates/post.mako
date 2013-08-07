@@ -8,6 +8,6 @@
 
         ${body | n}
 
-        <small>Tags: ${h.render_tags(request,tags)}</small>
+        <small><strong>Tags:</strong> ${h.render_tags(request,tags)}</small>
         </article>
 

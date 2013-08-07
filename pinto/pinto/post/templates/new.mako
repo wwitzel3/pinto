@@ -7,26 +7,9 @@
 <fieldset>
 <legend>New blog post</legend>
 
-<label for="title">Title</label>
-<% error_css = "error" if form.title.error else None %>
-${form.title.serialize(css_class=error_css) | n}
-% if error_css:
-<small class="error">${','.join(form.title.error.messages())}</small>
-% endif
-
-<label for="url">URL (Slug)</label>
-<% error_css = "error" if form.url.error else None %>
-${form.url.serialize(css_class=error_css) | n}
-% if error_css:
-<small class="error">${','.join(form.url.error.messages())}</small>
-% endif
-
-<label for="tags">Tags</label>
-<% error_css = "error" if form.tags.error else None %>
-${form.tags.serialize(css_class=error_css) | n}
-% if error_css:
-<small class="error">${','.join(form.tags.error.messages())}</small>
-% endif
+${h.serialize(form.title, 'Title')}
+${h.serialize(form.url, 'URL (Slug)')}
+${h.serialize(form.tags, 'Tags')}
 
 <label for="active">Publish</label>
 ${form.active.serialize() | n}
