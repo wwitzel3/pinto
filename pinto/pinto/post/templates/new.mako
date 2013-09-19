@@ -16,6 +16,7 @@ ${form.active.serialize() | n}
 
 ${form.markdown.serialize() | n}
 <div id="editor"></div>
+<small class="editor-error">Required</small>
 
 </fieldset>
 
